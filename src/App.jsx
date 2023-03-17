@@ -1,21 +1,40 @@
 import React, { useState } from "react";
-import { Switch, Route, NavLink } from "react-router-dom";
+import { Switch, Route, Redirect, NavLink } from "react-router-dom";
 
 import { AppointmentsPage } from "./containers/appointmentsPage/AppointmentsPage";
 import { ContactsPage } from "./containers/contactsPage/ContactsPage";
 
 function App() {
-  const [contacts, setContacts] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [contacts, setContacts] = useState([]);
 
   const ROUTES = {
     CONTACTS: "/contacts",
     APPOINTMENTS: "/appointments",
   };
 
-  const addContacts = (contact) => setContacts([...contacts, contact]);
-  const addAppointments = (appointment) =>
-    setAppointments([...appointments, appointment]);
+  const addAppointment = (title, contact, date, time) => {
+    setAppointments([
+      ...appointments,
+      {
+        title: title,
+        contact: contact,
+        date: date,
+        time: time,
+      },
+    ]);
+  };
+
+  const addContact = (name, phone, email) => {
+    setContacts([
+      ...contacts,
+      {
+        name: name,
+        phone: phone,
+        email: email,
+      },
+    ]);
+  };
 
   return (
     <>
@@ -29,13 +48,17 @@ function App() {
       </nav>
       <main>
         <Switch>
+          <Route exact path="/">
+            <Redirect to={ROUTES.CONTACTS} />
+          </Route>
           <Route path={ROUTES.CONTACTS}>
-            <ContactsPage contacts={contacts} addContacts={addContacts} />
+            <ContactsPage contacts={contacts} addContact={addContact} />
           </Route>
           <Route path={ROUTES.APPOINTMENTS}>
             <AppointmentsPage
               appointments={appointments}
-              addAppointments={addAppointments}
+              addAppointment={addAppointment}
+              contacts={contacts}
             />
           </Route>
         </Switch>
