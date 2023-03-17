@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, NavLink } from "react-router-dom";
 import { AppointmentsPage } from "./containers/appointmentsPage/AppointmentsPage";
 import { ContactsPage } from "./containers/contactsPage/ContactsPage";
 
-function App() {
+const App = () => {
   const [appointments, setAppointments] = useState([]);
   const [contacts, setContacts] = useState([]);
 
@@ -65,6 +65,6 @@ function App() {
       </main>
     </>
   );
-}
+};
 
 export default App;
