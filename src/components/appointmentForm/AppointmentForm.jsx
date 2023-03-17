@@ -48,12 +48,12 @@ export const AppointmentForm = ({
       <br />
       <label>
         <input
-            type="date"
-            name="date"
-            min={getTodayString()}
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
+          type="date"
+          name="date"
+          min={getTodayString()}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
         />
       </label>
       <br />
